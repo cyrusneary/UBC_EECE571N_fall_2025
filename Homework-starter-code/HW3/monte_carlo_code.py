@@ -39,22 +39,23 @@ def mc_prediction_first_visit(
 
 if __name__ == "__main__":
 
+    # Environment parameters
     gamma = 0.9
 
-    # Construct the MDP instance
+    # Construct the MDP instance    
     env = GridworldEnv(
-            height=4,
-            width=5,
-            init=(3, 0),
-            goal=(0, 4),
-            sink=(3, 4),
-            wall=(1, 2),
-            reward_goal=+1.0,
-            reward_sink=-1.0,
-            step_cost=-0.1,
-            slip_p=0.05,  # 5% chance to slip,
-            discount=gamma,
-        )
+        height=6,
+        width=9,
+        init=(2, 0),
+        goal=(0, 8),
+        sink=(5, 8),
+        wall=[(1, 2), (2, 2), (3,2), (4,5), (0,7), (1,7), (2,7)],
+        reward_goal=+1.0,
+        reward_sink=-1.0,
+        step_cost=-0.1,
+        slip_p=0.05,  # 5% chance to slip,
+        discount=gamma,
+    )
     
     # Compute optimal Q, V, and policy via Q-iteration for comparison with your RL-based results.
     Q_optimal, V_optimal, policy_optimal = get_optimal_Q_V_and_policy(env.mdp, max_iter=10000, tol=1e-6)
